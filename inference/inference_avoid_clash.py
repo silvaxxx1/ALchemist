@@ -266,6 +266,7 @@ def validation(caption_contact,caption,testloader, testset, savedir, args):
             coc = CollisionCheck(args.pocket_path_for_coc,args.coc_dis,center=center)
             break
     global all_good_nums
+    all_good_nums = 0
     while True:
         for i, (coords, residue, atom_type, mask, center, 
             index, contact_prob, contact_scaffold_prob) in enumerate(testloader):
