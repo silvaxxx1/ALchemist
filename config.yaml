@@ -1,0 +1,63 @@
+# ============================================================
+#  Lingo3DMol Configuration
+#  Edit this file to customize molecule generation.
+#
+#  Hamdi: the "generation" section is all you normally need.
+#  Save the file and re-run pipeline.py — changes take effect
+#  automatically.
+# ============================================================
+
+generation:
+  # How many valid molecules to generate per protein pocket.
+  num_molecules: 20
+
+  # Hard time limit per protein pocket (in hours).
+  # Increase for larger pockets or if you want more molecules.
+  max_hours: 3
+
+  # Candidates sampled per step.
+  # Higher = more diverse output but needs more GPU memory.
+  # Safe range: 4–16 for a 5–8 GB GPU.
+  fragment_batch_size: 8
+
+model:
+  # Paths to the two pre-trained model checkpoints.
+  # Download instructions are in readme.md.
+  contact_checkpoint: checkpoint/contact.pkl
+  generation_checkpoint: checkpoint/gen_mol.pkl
+
+  # Which GPU to use (0 = first GPU).
+  gpu: "0"
+
+pocket:
+  # Radius (Angstroms) around the ligand used to define the pocket.
+  # Increase to include a larger shell of protein atoms.
+  distance_cutoff: 8.0
+
+  # Maximum number of pocket atoms to keep.
+  # Reduce if the model runs out of GPU memory.
+  max_atoms: 450
+
+  # Minimum allowed distance (Angstroms) between a generated atom
+  # and any pocket atom (clash filter).
+  clash_distance: 2.5
+
+output:
+  # Base directory for all results.
+  directory: results/
+
+advanced:
+  # Probability threshold for classifying a residue as an NCI contact.
+  nci_threshold: 0.7
+
+  # How many anchor residues guide each generation step.
+  top_k_anchors: 5
+
+  # Minimum fragment token length — larger means fewer but bigger
+  # fragments per step (faster but less diverse).
+  fragment_min_length: 20
+
+  # Sampling temperature. 1.0 = default.
+  # Lower (e.g. 0.7) = more conservative/focused molecules.
+  # Higher (e.g. 1.3) = more exploratory/diverse molecules.
+  temperature: 1.0
