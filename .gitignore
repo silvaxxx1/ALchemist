@@ -1,10 +1,27 @@
+# Python
 *.pyc
 __pycache__/
-evaluate_datas/
-logs/
 *.swp
 *.ipynb_checkpoints/
+
+# Model weights (download separately — see checkpoint/readme.md)
 *.pkl
-*.pdb
-__MACOSX
+
+# Data files — place your PDB files locally, do not commit them
+datasets/**
+!datasets/README.md
+
+# Generated molecule outputs
+results/
+new_output*/
+try_out*/
+test_hamdi*/
+evaluate_datas/
+
+# Logs
 *.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
